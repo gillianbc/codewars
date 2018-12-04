@@ -1,0 +1,24 @@
+{
+  "name": "codewars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc --reporter=html --reporter=text mocha --recursive || true --timeout=3000",
+    "test2": "nyc --reporter=html --reporter=text mocha test/async*.js|| true --timeout=3000",
+    "test3": "nyc --reporter=html --reporter=text mocha test/prom*.js|| true --timeout=3000",
+    "test4": "nyc --reporter=html --reporter=text mocha test/utils/validatorsTest.js|| true --timeout=3000",
+    "test5": "nyc --reporter=html --reporter=text mocha test/warr*.js|| true --timeout=3000"
+  },
+  "author": "gillianbc",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "5.2.0",
+    "nyc": "^13.1.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
