@@ -8,7 +8,9 @@
     "test2": "nyc --reporter=html --reporter=text mocha test/async*.js|| true --timeout=3000",
     "test3": "nyc --reporter=html --reporter=text mocha test/prom*.js|| true --timeout=3000",
     "test4": "nyc --reporter=html --reporter=text mocha test/utils/validatorsTest.js|| true --timeout=3000",
-    "test5": "nyc --reporter=html --reporter=text mocha test/warr*.js|| true --timeout=3000"
+    "test5": "nyc --reporter=html --reporter=text mocha test/warr*.js|| true --timeout=3000",
+    "test6": "nyc --reporter=html --reporter=text mocha test/decor*.js|| true --timeout=3000",
+    "test7": "nyc --reporter=html --reporter=text mocha test/traind*.js|| true --timeout=3000"
   },
   "author": "gillianbc",
   "license": "ISC",
