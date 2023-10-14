@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const directions = require('../src/codewars/traindirections');
+const directions = require('../../src/codewars/traindirections');
 
 describe('Basic Tests',() => {
     it('should cope with a single value',() => {

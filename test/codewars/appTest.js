@@ -1,6 +1,6 @@
 const assert = require('chai').assert;
-const sayHello = require('../src/codewars/app').sayHello;
-const add = require('../src/codewars/app').add;
+const sayHello = require('../../src/codewars/app').sayHello;
+const add = require('../../src/codewars/app').add;
 
 describe('My little application', function(){
     describe('General test',() => {

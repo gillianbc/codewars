@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 const {
     Decorator
-} = require('../src/codewars/decorator');
+} = require('../../src/codewars/decorator');
 
 function sum() {
     return Array.prototype.reduce.call(arguments, function(sum, value) {
