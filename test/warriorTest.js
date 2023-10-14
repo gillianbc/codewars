@@ -2,7 +2,7 @@ const assert = require('chai').assert;
 const {
     rank,
     Warrior
-} = require('../warrior');
+} = require('../src/codewars/warrior');
 
 describe("Kata Tests",function(){
     var Goku = new Warrior();

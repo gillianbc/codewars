@@ -5,7 +5,7 @@ const log = console.log;
 const {
     alwaysTrue,
     legitString
-} = require('../posandneg');
+} = require('../src/codewars/posandneg');
 
 
 describe('Positive and Negative Tests', () => {

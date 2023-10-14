@@ -6,9 +6,9 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 
-const resolvedPromise = require('../promises').resolvedPromise;
-const rejectedPromise = require('../promises').rejectedPromise;
-const allResolved = require('../promises').allResolved;
+const resolvedPromise = require('../src/codewars/promises').resolvedPromise;
+const rejectedPromise = require('../src/codewars/promises').rejectedPromise;
+const allResolved = require('../src/codewars/promises').allResolved;
 
 describe('Promises',() => {
     describe('#resolvedPromise',() => {

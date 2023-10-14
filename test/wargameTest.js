@@ -10,7 +10,7 @@ const {
     rollDice,
     getNotARandomNumber,
     attack
-} = require('../wargame');
+} = require('../src/codewars/wargame');
 
 describe('Wargame', ()=>
 {

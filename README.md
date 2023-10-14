@@ -1,3 +1,7 @@
+# Codewars and Leetcode
+
+Little practice exercises for rainy afternoons when I get rusty
+Use the scrap file and the start script, but transfer to src when an exercise is finished and include a test
 # mochachai
 
 Examples demonstrating mocha unit testing and chai assertions

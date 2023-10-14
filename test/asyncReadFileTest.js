@@ -3,7 +3,7 @@ const should = require('chai').should();
 const _ = require('lodash');
 const log = console.log;
 
-const readCow = require('../asyncReadFile').readCow;
+const readCow = require('../src/codewars/asyncReadFile').readCow;
 
 describe('Async',() => {
     describe('#readCow',() => {

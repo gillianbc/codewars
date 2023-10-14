@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const secret = require('../secretTriplets2');
+const secret = require('../src/codewars/secretTriplets2');
 
 describe('Basic Tests',() => {
     it('should cope with whatisup',() => {
