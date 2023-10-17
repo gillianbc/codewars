@@ -1,4 +1,3 @@
-console.log('This is the scrap file')
 
 /*
 Given a function fn, return a new function that is identical to the original function except that it ensures fn is called at most once.
@@ -36,28 +35,32 @@ calls is a valid JSON array
  */
 
 const once = (fn) => {
+    console.log(fn.toString());
     let used = false;
-
     return function(...args) {
         if (!used) {
+            console.log('I feel so used now')
             used = true
             return fn(...args)
         }
         else {
+            console.log('I told you not to call me again')
             return undefined;
         }
     }
 }
 
-
+module.exports = {
+    once
+}
+/*
 let fn = (a,b,c) => (a + b + c)
 console.log(fn(1,2,3))
 console.log(fn(2,4,3))
 
 const onceFn = once(fn);
-console.log(onceFn.toString())
-console.log("First " + onceFn(1,2,3))
-console.log("Second " + onceFn(2,4,3))
+console.log(onceFn(1,2,3))
+console.log(onceFn(2,4,3))*/
 
 
 /**
