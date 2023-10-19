@@ -66,13 +66,11 @@ fnName is one of "sum", "factorial" and "fibonacci"
  */
 
 const memoize = (fn) => {
-    console.log(fn.toString());
 
     let cache = {};
 
     const isCached = (func, argVals) => {
         // Does the cache contain a request for this function with these args?
-        console.log('Checking the cache for function ' + func.name + ' args ' + argVals)
         // get the existing cache row for this function
         let existingCacheEntryForFunc = cache[func.name];
         if (existingCacheEntryForFunc == undefined)
@@ -118,11 +116,10 @@ const memoize = (fn) => {
         cacheEntry.results.push(result);
     }
 
-    const addToCache = (func, argVals) => {
+    const addToCache = (func, argVals, result) => {
         // adds the function, args and result to the cache
-        console.log('Adding to the cache ' + func + ' ' + argVals)
         let functionName = func.name;
-        let result = func(...argVals)
+
 
         // get the existing cache row for this function
         let existingCacheEntryForFunc = cache[functionName];
@@ -134,12 +131,10 @@ const memoize = (fn) => {
             addNewCacheFunction(functionName, functionArgs, result);
         }
 
-        console.log('Cache after add ' + JSON.stringify(cache))
 
     }
 
     const getCachedValue = (funcname, argVals) => {
-        console.log('Getting from the cache ' + funcname + ' args ' + argVals)
         if (cache[funcname] != undefined){
             let index = findArrayIndex(cache[funcname].args, argVals);
             if (index >= 0){
@@ -152,24 +147,17 @@ const memoize = (fn) => {
 
     return function (...args) {
         if (!isCached(fn, args)) {
-            console.log('Not from the cache')
-            addToCache(fn, args)
-            return fn(...args)
+            let result = fn(...args)
+            addToCache(fn, args, result )
+
+            return result;
         } else {
-            console.log('Getting value from the cache')
+
             return getCachedValue(fn.name, args);
         }
     }
 }
 
-
-const sum = (a, b, c) => a + b + c;
-const memoizedSum = memoize(sum);
-const factorial = (n) => (n <= 1) ? 1 : (n * factorial(n - 1));
-const fibonacci = (n) => (n <= 1) ? 1 : (fibonacci(n - 1) + fibonacci(n - 2));
-
-
-console.log(memoizedSum(1, 2, 3))
-console.log(memoizedSum(1, 2, 3))
-// console.log(memoizedSum(12, 2, 3))
-// console.log(memoizedSum(12, 2, 3))
+module.exports = {
+    memoize
+}

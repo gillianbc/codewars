@@ -1,4 +1,4 @@
-const {sayHello} = require("../../src/codewars/app");
+
 const assert = require('chai').assert;
 const argumentsLength = require('../../src/leetcode/argsLength').argumentsLength;
 
