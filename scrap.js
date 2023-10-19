@@ -72,9 +72,35 @@ const memoize = (fn) => {
 
     const isCached = (func, argVals) => {
         // Does the cache contain a request for this function with these args?
-        console.log('Checking the cache ' + func + ' ' + argVals)
-        // TODO
+        console.log('Checking the cache for function ' + func.name + ' args ' + argVals)
+        // get the existing cache row for this function
+        let existingCacheEntryForFunc = cache[func.name];
+        if (existingCacheEntryForFunc == undefined)
+            return false;
+        // is there an entry for these argVals
+
+
+        if (findArrayIndex(existingCacheEntryForFunc.args, argVals) >= 0){
+            return true;
+        }
         return false;
+    }
+
+    function findArrayIndex(x, y) {
+        // find index of array y in array of arrays x
+        return x.findIndex(subArray => arraysEqual(subArray, y));
+    }
+
+    function arraysEqual(arr1, arr2) {
+        if (arr1.length !== arr2.length) {
+            return false;
+        }
+        for (let i = 0; i < arr1.length; i++) {
+            if (arr1[i] !== arr2[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     function addNewCacheFunction(functionName, functionArgs, result) {
@@ -87,9 +113,9 @@ const memoize = (fn) => {
         Object.assign(cache, cacheEntry);
     }
 
-    function appendToExistingCacheFunction(existingCacheEntryForFunc, functionArgs, result) {
-        existingCacheEntryForFunc.args.push(functionArgs);
-        existingCacheEntryForFunc.results.push(result)
+    function appendToExistingCacheFunction(cacheEntry, functionArgs, result) {
+        cacheEntry.args.push(functionArgs);
+        cacheEntry.results.push(result);
     }
 
     const addToCache = (func, argVals) => {
@@ -105,7 +131,6 @@ const memoize = (fn) => {
         if (existingCacheEntryForFunc != undefined) {
             appendToExistingCacheFunction(existingCacheEntryForFunc, functionArgs, result);
         } else {
-
             addNewCacheFunction(functionName, functionArgs, result);
         }
 
@@ -115,8 +140,13 @@ const memoize = (fn) => {
 
     const getCachedValue = (func, argVals) => {
         console.log('Getting from the cache ' + func + ' ' + argVals)
-        let row = cache[func];
-        // TODO - how do I find the entry for this set of args?  forEach?
+        if (cache[func] != undefined){
+            let index = findArrayIndex(cache[func].args, argVals);
+            if (index >= 0){
+                return cache[func].results[index];
+            }
+        }
+
         return undefined;
     }
 
@@ -126,7 +156,7 @@ const memoize = (fn) => {
             addToCache(fn, args)
             return fn(...args)
         } else {
-            console.log('From the cache')
+            console.log('Getting value from the cache')
             return getCachedValue(fn, ...args);
         }
     }
@@ -139,5 +169,6 @@ const factorial = (n) => (n <= 1) ? 1 : (n * factorial(n - 1));
 const fibonacci = (n) => (n <= 1) ? 1 : (fibonacci(n - 1) + fibonacci(n - 2));
 
 
+console.log(memoizedSum(1, 2, 3))
 console.log(memoizedSum(1, 2, 3))
 console.log(memoizedSum(12, 2, 3))
