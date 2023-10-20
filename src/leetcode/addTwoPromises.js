@@ -16,7 +16,7 @@ addTwoPromises(Promise.resolve(2), Promise.resolve(3))
   .then(console.log); // 5
 
 // alternatively, using Promise.all
-var addTwoPromises1 = async function (promise1, promise2) {
+var addTwoPromisesAll = async function (promise1, promise2) {
   return Promise.all([promise1, promise2])
     .then((values) => {
       const sum = values.reduce((total, value) => total + value, 0);
@@ -24,11 +24,11 @@ var addTwoPromises1 = async function (promise1, promise2) {
     });
 };
 
-addTwoPromises1(Promise.resolve(2), Promise.resolve(3))
+addTwoPromisesAll(Promise.resolve(2), Promise.resolve(3))
   .then(console.log); // 5
 
 // alternatively, using async await
-var addTwoPromises2 = async function (promise1, promise2) {
+var addTwoPromisesAsync = async function (promise1, promise2) {
   try {
     const value1 = await promise1;
     const value2 = await promise2;
@@ -41,5 +41,11 @@ var addTwoPromises2 = async function (promise1, promise2) {
   }
 };
 
-addTwoPromises2(Promise.resolve(2), Promise.resolve(3))
+addTwoPromisesAsync(Promise.resolve(2), Promise.resolve(3))
   .then(console.log); // 5
+
+module.exports = {
+  addTwoPromises,
+  addTwoPromisesAll,
+  addTwoPromisesAsync
+}
