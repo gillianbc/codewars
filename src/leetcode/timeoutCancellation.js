@@ -1,27 +1,29 @@
 /**
- * 2725. Interval Cancellation
- * Given a function fn, an array of arguments args, and an interval time t, return a cancel function cancelFn.
+ * 2715 Timeout Cancellation
+ *  The important thing to understand, is that due to the magic of closures, the cancelFn returned by cancellable
+ *  retains access to the scheduled job after the end of the cancellable function
  *
- * The function fn should be called with args immediately and then called again every t milliseconds until cancelFn is called at cancelT ms.
- * @param fn
- * @param args
- * @param t
- * @returns {cancelFn}
+ *  Being able to pause before executing a function and provide a way of cancelling it before it actually gets invoked,
+ *  is a useful feature.  For example, if I pause Channel 4, then it will switch TV to standby after 5 minutes, unless I
+ *  click a button to cancel the standby
+ *
  */
 
-
-
+/**
+ * @param {Function} fn
+ * @param {Array} args
+ * @param {number} t
+ * @return {Function}
+ */
 const cancellable = function(fn, args, t) {
-
-  fn(...args);
-  const repeatingJobId = setInterval(()=>{
+  // Schedule the function to run in t milliseconds
+  const scheduledJob = setTimeout(()=>{
     fn(...args)
   }, t);
-
   // Provide a cancel function in case we want to stop the scheduledJob and abort
   const cancelFn = function (){
     console.log('Cancelling scheduled job (if not already run)')
-    clearInterval(repeatingJobId);
+    clearTimeout(scheduledJob);
   };
   return cancelFn ;
 };
@@ -36,7 +38,7 @@ const multiplyByFive = (x) => {
 }
 
 // Test data
-const args = [2], t = 2, cancelT = 40
+const args = [2], t = 20, cancelT = 50
 
 // Runs the test function and stores the results
 const executeAndStoreResults = (...argsArr) => {
@@ -47,10 +49,10 @@ const executeAndStoreResults = (...argsArr) => {
 
 // Go! Run our function for the given args after t milliseconds.  It will return us a function
 // we can use to cancel it, if we wish
-const cancelRepeatingJob = cancellable(executeAndStoreResults, args, t);
+const cancelScheduledJob = cancellable(executeAndStoreResults, args, t);
 
 //  After cancelT milliseconds, run the cancelScheduledJob and log out any stored results
 setTimeout(() => {
-  cancelRepeatingJob()
+  cancelScheduledJob()
   console.log(results) // [{"time":20,"returned":10}]
 }, cancelT)
