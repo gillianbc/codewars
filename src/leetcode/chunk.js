@@ -40,7 +40,7 @@ var chunk = function(arr, size) {
   function addToResult(item) {
     if (item.length > 0)
       console.log('odd one out')
-      result.push(item)
+    result.push(item)
   }
 
   if (result.length < numOfChunks){
